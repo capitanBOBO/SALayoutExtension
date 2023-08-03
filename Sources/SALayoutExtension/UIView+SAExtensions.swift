@@ -31,6 +31,16 @@ public extension UIView {
         if let side = right { rightAnchor ~= superview.rightAnchor - side }
     }
 
+    func pinSidesTo(layoutGuide: UILayoutGuide, excluding sides: [SASide] = [], offset: CGFloat = 0) {
+        guard let superview = self.superview else {
+            fatalError("Not in superview")
+        }
+        if !sides.contains(.top) { topAnchor ~= superview.topAnchor + offset }
+        if !sides.contains(.left) { leftAnchor ~= superview.leftAnchor + offset }
+        if !sides.contains(.bottom) { bottomAnchor ~= superview.bottomAnchor - offset }
+        if !sides.contains(.right) { rightAnchor ~= superview.rightAnchor - offset }
+    }
+
     func pinSidesToSuperviewSides(excluding sides: [SASide] = [], offset: CGFloat = 0) {
         guard let superview = self.superview else {
             fatalError("Not in superview")
